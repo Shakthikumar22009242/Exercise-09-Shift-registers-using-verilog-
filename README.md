@@ -1,9 +1,12 @@
 
 # Experiment--09-Implementation-of Shift-registers-using-verilog-
-### AIM: To implement PISO , PIPO,PISO  using verilog and validating their functionality using their functional tables
-### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
-### SOFTWARE REQUIRED:   Quartus prime
-### THEORY 
+## AIM:
+To implement PISO , PIPO,PISO  using verilog and validating their functionality using their functional tables
+## HARDWARE REQUIRED:
+PC, Cyclone II , USB flasher
+## SOFTWARE REQUIRED:
+Quartus prime
+## THEORY 
 Shift registers are basically of 4 types. These are:
 
 Serial In Serial Out shift register
@@ -40,40 +43,85 @@ The logic circuit given below shows a parallel-in-parallel-out shift register. T
 FIGURE-04
 A Parallel in Parallel out (PIPO) shift register is used as a temporary storage device and like SISO Shift register it acts as a delay element.
 
-### Procedure
-/* write all the steps invloved */
+## Procedure
+### Step1:
+Create a new project wizard in Quartus software.
+### Step2:
+Create a module mentioned with the filename.
+### Step3:
+After mentioning the module, execute the programs for corresponding Shift registors.
+### Step4:
+Get the RTL representation for all the Shift registors.
+### Step5:
+Finally obtain the timing diagram and end the program.
 
-
-
-### PROGRAM 
+## PROGRAM 
 /*
-Program for  Implementation-of Shift-registers-using-verilog-
-Developed by: 
-RegisterNumber:  
+Program for  Implementation-of Shift-registers-using-verilog
+
+Developed by: Shakthi kumar S
+
+RegisterNumber: 212222110043\
 */
+### PISO
+```c++
+module ex09(Clk, Parallel_In,load, out);
+input Clk,load;
+input [3:0]Parallel_In;
+output reg out;
+reg [3:0]tmp;
+always @(posedge Clk)
+begin
+if(load)
+tmp<=Parallel_In;
+else
+begin
+out<=tmp[3];
+tmp<={tmp[2:0],1'b0};
+end
+end
+endmodule
+```
+### PIPO
+```c++
+module ex09(Pi,Clk,Po);
+input Clk;
+input [3:0] Pi;
+output reg [3:0] Po;
+always @ (posedge Clk)
+begin
+Po=Pi;
+end 
+endmodule 
+```
+### SIPO
+```c++
+module ex09(Si,Clk,Po);
+input Si,Clk;
+output [0:7]  Po;
+reg [0:7]temp;
+always @ (posedge Clk)
+begin
+temp={temp[0:6],Si};
+end
+assign Po=temp;
+endmodule 
+```
+## RTL LOGIC  REGISTERS   
+### PISO
+![](DE09-1.png)
+### PIPO
+![](DE09-3.png)
+### SIPO
+![](DE09-5.png)
 
+## TIMING DIGRAMS FOR SHIFT REGISTERS
+### PISO
+![](DE09-2.png)
+### PIPO
+![](DE09-4.png)
+### SIPO
+![](DE09-6.png)
 
-
-
-
-
-### RTL LOGIC  REGISTERS   
-
-
-
-
-
-
-
-
-
-### TIMING DIGRAMS FOR SHIFT REGISTERS
-
-
-
-
-
-
-
-
-### RESULTS 
+## RESULT
+Thus PISO ,PIPO ,PISO has been implemented using verilog and validated their functionality using their functional tables.
